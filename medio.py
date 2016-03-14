@@ -3,12 +3,10 @@ class Medio(object):
     def __init__(self, blancos):
         self.blancos = blancos
 
-
-    def reflejar(self, una_senal, tiempo_inicial, tiempo_final):
+    def reflejar(self, una_senal):
         """
         Los blancos en el medio reflejan la senal
-        """
+        """        
+        self.blancos.reflejar(una_senal)
 
-        #TODO reflejar en un medio debe reflejar en todos los blancos de un medio
-        #y devolver la senal reflejada
-        pass
+        return una_senal

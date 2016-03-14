@@ -21,25 +21,31 @@ def main():
     # parametros del generador de senales
     amplitud = 0.2
     fase = 1
-    frecuencia = 20*math.pi
+    frecuencia = 20
 
-    #TODO construir un nuevo genrador de senales
+    gen = generador.Generador()
+    detect = detector.Detector()
+    rad = radar.Radar(gen, detect)
 
-    #TODO construir un detector
-
-    #TODO construir un nuevo radar
-
+    senal = rad.generador.generar(amplitud, fase, frecuencia, tiempo_inicial, tiempo_final)
 
     # parametros para un blanco
     amplitud_de_frecuencia_del_blanco = amplitud + 100
     tiempo_inicial_del_blanco = datetime.datetime(2016, 3, 5, 2)
     tiempo_final_del_blanco = datetime.datetime(2016, 3, 5, 4)
-    #TODO contruir un nuevo blanco
+    
+    blc = blanco.Blanco(amplitud_de_frecuencia_del_blanco, tiempo_inicial_del_blanco, tiempo_final_del_blanco)
 
+    md = medio.Medio(blc)
 
-    #TODO contruir un medio
+    senal_reflejada = md.reflejar(senal)
+ 
+    rad.detector.detectar(senal, senal_reflejada)
 
-    #TODO construir un radar
+    import matplotlib.pyplot as plt
+    plt.plot(senal_reflejada.data)
+    plt.show()
 
+    
 if __name__ == "__main__":
     main()
